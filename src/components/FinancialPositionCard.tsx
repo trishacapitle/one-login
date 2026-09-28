@@ -28,7 +28,7 @@ export function FinancialPositionCard({
   const isInTheBlack = position.isInTheBlack;
 
   return (
-    <section className="w-full space-y-3.5">
+    <section className="w-full space-y-3">
       {/* Section Header */}
       <div className="flex items-center justify-between px-1">
         <h2 className="text-xs font-bold tracking-wider text-zinc-400 uppercase">
@@ -68,21 +68,21 @@ export function FinancialPositionCard({
           >
             {isInTheBlack ? (
               <>
-                <CheckCircle2 className="w-3.5 h-3.5" />
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                 <span>In The Black</span>
               </>
             ) : (
               <>
-                <AlertTriangle className="w-3.5 h-3.5" />
+                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                 <span>In The Red</span>
               </>
             )}
           </div>
 
-          {/* Large Hero Profit Amount */}
+          {/* Large Hero Profit Amount with dynamic text sizing */}
           <div className="py-1">
             <div
-              className={`text-4xl sm:text-5xl font-extrabold tracking-tight tabular-nums transition-colors duration-200 ${
+              className={`text-3xl min-[360px]:text-4xl sm:text-5xl font-extrabold tracking-tight tabular-nums transition-colors duration-200 ${
                 isInTheBlack ? "text-emerald-400" : "text-rose-400"
               }`}
             >
@@ -96,39 +96,39 @@ export function FinancialPositionCard({
       </div>
 
       {/* Supporting Metrics: Money In and Money Out */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
         {/* Money In */}
-        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-4 transition-all hover:border-zinc-700/80">
+        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-3.5 sm:p-4 transition-all hover:border-zinc-700/80">
           <div className="flex items-center justify-between text-zinc-400 mb-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate mr-1">
               Money In
             </span>
-            <div className="w-5 h-5 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <div className="w-5 h-5 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
               <ArrowUpRight className="w-3.5 h-3.5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums">
+          <div className="text-xl min-[360px]:text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums truncate">
             {formatCurrency(displayMoneyIn)}
           </div>
-          <p className="text-[11px] text-zinc-500 mt-0.5">
+          <p className="text-[10px] sm:text-[11px] text-zinc-500 mt-0.5 truncate">
             Income received
           </p>
         </div>
 
         {/* Money Out */}
-        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-4 transition-all hover:border-zinc-700/80">
+        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-3.5 sm:p-4 transition-all hover:border-zinc-700/80">
           <div className="flex items-center justify-between text-zinc-400 mb-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate mr-1">
               Money Out
             </span>
-            <div className="w-5 h-5 rounded-md bg-zinc-800 text-zinc-400 flex items-center justify-center">
+            <div className="w-5 h-5 rounded-md bg-zinc-800 text-zinc-400 flex items-center justify-center shrink-0">
               <ArrowDownRight className="w-3.5 h-3.5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums">
+          <div className="text-xl min-[360px]:text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums truncate">
             {formatCurrency(displayMoneyOut)}
           </div>
-          <p className="text-[11px] text-zinc-500 mt-0.5">
+          <p className="text-[10px] sm:text-[11px] text-zinc-500 mt-0.5 truncate">
             Expenses recorded
           </p>
         </div>

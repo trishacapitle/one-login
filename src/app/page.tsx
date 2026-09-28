@@ -150,7 +150,7 @@ export default function HomePage() {
       />
 
       {/* Main Single Screen Content */}
-      <main className="flex-1 w-full max-w-md mx-auto px-4 py-5 pb-28 space-y-6">
+      <main className="flex-1 w-full max-w-md mx-auto px-4 py-4 pb-[calc(7rem+env(safe-area-inset-bottom,0px))] space-y-5">
         {/* Financial Position (Hero Profit + Money In + Money Out) */}
         <FinancialPositionCard
           position={financialPosition}
@@ -173,7 +173,7 @@ export default function HomePage() {
 
       {/* Confirmation Toast */}
       {confirmationToast && (
-        <div className="fixed top-16 inset-x-4 z-50 max-w-sm mx-auto flex items-center space-x-2 px-4 py-3 rounded-xl bg-zinc-900 border border-emerald-500/50 text-emerald-400 text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="fixed top-[calc(4rem+env(safe-area-inset-top,0px))] inset-x-4 z-50 max-w-sm mx-auto flex items-center space-x-2 px-4 py-3 rounded-xl bg-zinc-900 border border-emerald-500/50 text-emerald-400 text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span className="truncate">{confirmationToast}</span>
         </div>

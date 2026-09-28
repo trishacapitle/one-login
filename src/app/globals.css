@@ -3,6 +3,10 @@
 :root {
   --background: #09090b;
   --foreground: #f4f4f5;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
 }
 
 body {
@@ -15,6 +19,14 @@ body {
   -webkit-tap-highlight-color: transparent;
   min-height: 100vh;
   min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+/* Prevent unwanted zoom on focus in iOS Safari by ensuring >= 16px font-size */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
 }
 
 /* Custom scrollbar */
