@@ -57,7 +57,7 @@ export function RecentJobsList({ jobs }: RecentJobsListProps) {
           {displayJobs.map((job) => (
             <div
               key={job.id}
-              className="flex items-center justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-3.5 hover:border-zinc-700/80 transition-all"
+              className="flex items-center justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-3.5 hover:border-zinc-700/80 transition-all shadow-[inset_0_1px_0_0_rgba(255,255,255,0.03)]"
             >
               <div className="space-y-0.5 min-w-0 pr-3">
                 <div className="flex items-center space-x-2">

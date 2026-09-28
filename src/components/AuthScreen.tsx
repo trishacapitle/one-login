@@ -87,7 +87,7 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
             type="button"
             onClick={handleDemoLogin}
             disabled={demoLoading || loading}
-            className="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-extrabold text-sm tracking-wide uppercase transition-all shadow-md active:scale-98 disabled:opacity-60 flex items-center justify-center space-x-2"
+            className="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-extrabold text-sm tracking-wide uppercase transition-all shadow-md shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)] active:scale-98 disabled:opacity-60 flex items-center justify-center space-x-2"
           >
             {demoLoading ? (
               <span>Starting demo...</span>

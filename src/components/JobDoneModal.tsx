@@ -37,6 +37,13 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
   if (!isOpen) return null;
 
   const handleFillSample = () => {
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      try {
+        navigator.vibrate(10);
+      } catch {
+        // unsupported
+      }
+    }
     setCustomer("Smith Plumbing");
     setDescription("Bathroom renovation");
     setPrice("2400");
@@ -64,6 +71,13 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
 
     setSubmitting(true);
     try {
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([15, 30, 20]);
+        } catch {
+          // unsupported
+        }
+      }
       await onSubmit({
         customer: cleanCustomer,
         description: cleanDesc,
@@ -87,7 +101,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
         Elevated cleanly above Mobile Safari's floating bottom search bar via outer pb-[max(5.5rem, ...)]
         and internal pb-8 on the form action so the [DONE] button is always 100% visible and unclipped.
       */}
-      <div className="relative w-full max-w-md max-h-[82svh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 pb-6 shadow-2xl z-10 animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-200 overscroll-contain">
+      <div className="relative w-full max-w-md max-h-[82svh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 pb-6 shadow-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] z-10 animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-200 overscroll-contain">
         {/* Mobile pull handle */}
         <div className="w-12 h-1.5 bg-zinc-700/60 rounded-full mx-auto mb-3 sm:hidden" />
 
@@ -145,7 +159,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
               placeholder="e.g. Smith Plumbing"
               value={customer}
               onChange={(e) => setCustomer(e.target.value)}
-              className="w-full px-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-base"
+              className="w-full px-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-base shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.5)]"
             />
           </div>
 
@@ -162,7 +176,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
               placeholder="e.g. Bathroom renovation"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-base"
+              className="w-full px-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-base shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.5)]"
             />
           </div>
 
@@ -187,7 +201,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
                   const val = e.target.value.replace(/[^0-9.]/g, "");
                   setPrice(val);
                 }}
-                className="w-full pl-9 pr-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-bold placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-lg tabular-nums"
+                className="w-full pl-9 pr-4 py-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-100 font-bold placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-lg tabular-nums shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.5)]"
               />
             </div>
           </div>
@@ -197,7 +211,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full min-h-[56px] py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-xl shadow-emerald-500/25 active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full min-h-[56px] py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-xl shadow-emerald-500/25 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)] active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
             >
               {submitting ? (
                 <span>Recording...</span>
