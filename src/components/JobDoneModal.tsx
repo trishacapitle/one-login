@@ -79,12 +79,16 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2.5 sm:p-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
       {/* Click outside backdrop */}
       <div className="absolute inset-0" onClick={onClose} />
 
-      {/* Mobile Bottom Sheet Modal Container with safe-area & keyboard scrollability */}
-      <div className="relative w-full max-w-lg max-h-[92dvh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-t-3xl sm:rounded-2xl p-5 sm:p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] shadow-2xl z-10 animate-in slide-in-from-bottom-8 duration-200 overscroll-contain">
+      {/* 
+        Safari search bar clearance:
+        Modal is elevated above Safari's floating bottom URL bar via outer pb-[calc(3rem+env(safe-area-inset-bottom))]
+        and styled with rounded-3xl so it floats cleanly without being clipped.
+      */}
+      <div className="relative w-full max-w-lg max-h-[88dvh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 shadow-2xl z-10 animate-in slide-in-from-bottom-8 duration-200 overscroll-contain">
         {/* Mobile pull handle */}
         <div className="w-12 h-1.5 bg-zinc-700/60 rounded-full mx-auto mb-3 sm:hidden" />
 
@@ -190,11 +194,11 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
           </div>
 
           {/* Submit Action */}
-          <div className="pt-2">
+          <div className="pt-2 pb-1">
             <button
               type="submit"
               disabled={submitting}
-              className="w-full min-h-[52px] py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-lg shadow-emerald-500/20 active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full min-h-[54px] py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-xl shadow-emerald-500/25 active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
             >
               {submitting ? (
                 <span>Recording...</span>
