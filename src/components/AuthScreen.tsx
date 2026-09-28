@@ -101,11 +101,12 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
         </div>
 
         {/* Divider */}
-        <div className="relative flex items-center justify-center">
-          <div className="border-t border-zinc-800 w-full" />
-          <span className="bg-zinc-950 px-3 text-[11px] font-bold uppercase tracking-widest text-zinc-400">
-            Or Use Email
+        <div className="flex items-center space-x-3 py-1">
+          <div className="flex-1 h-px bg-zinc-800" />
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 shrink-0 select-none">
+            Or Sign In With Email
           </span>
+          <div className="flex-1 h-px bg-zinc-800" />
         </div>
 
         {/* Standard Email / Password Form */}
