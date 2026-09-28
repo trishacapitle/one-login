@@ -24,6 +24,20 @@ export async function POST(request: Request) {
       }
 
       const cleanEmail = email.trim().toLowerCase();
+      if (!cleanEmail.includes("@")) {
+        return NextResponse.json(
+          { error: "Please enter a valid email address" },
+          { status: 400 }
+        );
+      }
+
+      if (password.length < 6) {
+        return NextResponse.json(
+          { error: "Password must be at least 6 characters" },
+          { status: 400 }
+        );
+      }
+
       const userId = `user-${cleanEmail.replace(/[^a-zA-Z0-9]/g, "-")}`;
 
       return NextResponse.json({

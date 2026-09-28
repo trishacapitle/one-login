@@ -52,7 +52,7 @@ describe("Financial Calculations Engine", () => {
       {
         id: "j1",
         userId: "u1",
-        customer: "Client A",
+        customer: "Customer A",
         description: "Small fix",
         amount: 1500,
         completedAt: new Date().toISOString(),

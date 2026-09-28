@@ -82,29 +82,6 @@ export async function loginWithEmail(
   }
 }
 
-export async function signUpWithEmail(
-  email: string,
-  password: string
-): Promise<{ user: AppUser | null; error: string | null }> {
-  try {
-    const res = await fetch("/api/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "signup", email, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      return { user: null, error: data.error || "Sign up failed" };
-    }
-    if (typeof window !== "undefined" && data.user) {
-      localStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(data.user));
-    }
-    return { user: data.user, error: null };
-  } catch (err: any) {
-    return { user: null, error: err.message || "Network error" };
-  }
-}
-
 export async function signOut(): Promise<void> {
   if (typeof window !== "undefined") {
     localStorage.removeItem(STORAGE_KEYS.SESSION);

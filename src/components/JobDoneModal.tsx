@@ -96,7 +96,7 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
               Job Done
             </h2>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Record completed work and update this month&apos;s income
+              Record completed work and update this month&apos;s Money In
             </p>
           </div>
           <button

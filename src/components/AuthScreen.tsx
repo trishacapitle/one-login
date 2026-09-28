@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import { ShieldCheck, ArrowRight, Sparkles, Lock, Mail } from "lucide-react";
-import { loginDemoUser, loginWithEmail, signUpWithEmail, AppUser } from "@/lib/dataRepository";
+import { loginDemoUser, loginWithEmail, AppUser } from "@/lib/dataRepository";
 
 interface AuthScreenProps {
   onSuccess: (user: AppUser) => void;
 }
 
 export function AuthScreen({ onSuccess }: AuthScreenProps) {
-  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,9 +39,7 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
     setError(null);
 
     try {
-      const res = isSignUp
-        ? await signUpWithEmail(email, password)
-        : await loginWithEmail(email, password);
+      const res = await loginWithEmail(email, password);
 
       if (res.error) {
         setError(res.error);
@@ -162,21 +159,8 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
             disabled={loading || demoLoading}
             className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800 text-zinc-100 font-bold text-xs uppercase tracking-wider transition-all border border-zinc-700 active:scale-98 disabled:opacity-50"
           >
-            {loading ? "Processing..." : isSignUp ? "Create Account" : "Sign In"}
+            {loading ? "Signing in..." : "Sign In"}
           </button>
-
-          <div className="text-center pt-1">
-            <button
-              type="button"
-              onClick={() => {
-                setIsSignUp(!isSignUp);
-                setError(null);
-              }}
-              className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
-            >
-              {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
-            </button>
-          </div>
         </form>
       </div>
     </main>

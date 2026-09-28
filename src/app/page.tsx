@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useTransition } from "react";
 import { Header } from "@/components/Header";
-import { FinancialSummaryCard } from "@/components/FinancialSummaryCard";
+import { FinancialPositionCard } from "@/components/FinancialPositionCard";
 import { RecentJobsList } from "@/components/RecentJobsList";
 import { PrimaryActionButton } from "@/components/PrimaryActionButton";
 import { JobDoneModal } from "@/components/JobDoneModal";
@@ -151,8 +151,8 @@ export default function HomePage() {
 
       {/* Main Single Screen Content */}
       <main className="flex-1 w-full max-w-md mx-auto px-4 py-5 pb-28 space-y-6">
-        {/* Financial Summary (Hero Profit + Money In + Money Out) */}
-        <FinancialSummaryCard
+        {/* Financial Position (Hero Profit + Money In + Money Out) */}
+        <FinancialPositionCard
           position={financialPosition}
           isOptimisticPending={isPending}
         />

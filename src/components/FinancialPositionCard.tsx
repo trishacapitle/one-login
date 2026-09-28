@@ -5,23 +5,23 @@ import { ArrowDownRight, ArrowUpRight, CheckCircle2, AlertTriangle } from "lucid
 import { FinancialPosition } from "@/lib/types";
 import { formatCurrency } from "@/lib/calculations";
 
-interface FinancialSummaryCardProps {
+interface FinancialPositionCardProps {
   position: FinancialPosition;
   isOptimisticPending?: boolean;
 }
 
-export function FinancialSummaryCard({
+export function FinancialPositionCard({
   position,
   isOptimisticPending = false,
-}: FinancialSummaryCardProps) {
+}: FinancialPositionCardProps) {
   // Animated value transitions
-  const [displayIn, setDisplayIn] = useState(position.moneyIn);
-  const [displayOut, setDisplayOut] = useState(position.moneyOut);
+  const [displayMoneyIn, setDisplayMoneyIn] = useState(position.moneyIn);
+  const [displayMoneyOut, setDisplayMoneyOut] = useState(position.moneyOut);
   const [displayProfit, setDisplayProfit] = useState(position.profit);
 
   useEffect(() => {
-    setDisplayIn(position.moneyIn);
-    setDisplayOut(position.moneyOut);
+    setDisplayMoneyIn(position.moneyIn);
+    setDisplayMoneyOut(position.moneyOut);
     setDisplayProfit(position.profit);
   }, [position.moneyIn, position.moneyOut, position.profit]);
 
@@ -89,26 +89,26 @@ export function FinancialSummaryCard({
               {formatCurrency(displayProfit)}
             </div>
             <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 mt-1">
-              Net Profit
+              Profit
             </p>
           </div>
         </div>
       </div>
 
-      {/* Flanking Metrics: $ IN and $ OUT */}
+      {/* Supporting Metrics: Money In and Money Out */}
       <div className="grid grid-cols-2 gap-3">
         {/* Money In */}
         <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-4 transition-all hover:border-zinc-700/80">
           <div className="flex items-center justify-between text-zinc-400 mb-1.5">
             <span className="text-[11px] font-bold uppercase tracking-wider">
-              $ In
+              Money In
             </span>
             <div className="w-5 h-5 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
               <ArrowUpRight className="w-3.5 h-3.5" />
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums">
-            {formatCurrency(displayIn)}
+            {formatCurrency(displayMoneyIn)}
           </div>
           <p className="text-[11px] text-zinc-500 mt-0.5">
             Income received
@@ -119,14 +119,14 @@ export function FinancialSummaryCard({
         <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-4 transition-all hover:border-zinc-700/80">
           <div className="flex items-center justify-between text-zinc-400 mb-1.5">
             <span className="text-[11px] font-bold uppercase tracking-wider">
-              $ Out
+              Money Out
             </span>
             <div className="w-5 h-5 rounded-md bg-zinc-800 text-zinc-400 flex items-center justify-center">
               <ArrowDownRight className="w-3.5 h-3.5" />
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 tabular-nums">
-            {formatCurrency(displayOut)}
+            {formatCurrency(displayMoneyOut)}
           </div>
           <p className="text-[11px] text-zinc-500 mt-0.5">
             Expenses recorded

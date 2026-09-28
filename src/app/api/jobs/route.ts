@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db, jobs, expenses } from "@/db";
-import { eq, desc } from "drizzle-orm";
-import { generateSeedData } from "@/lib/seedData";
+import { eq, desc, and, gte, lte } from "drizzle-orm";
+import { seedUserDatabase } from "@/db/seed";
 import { JobItem, ExpenseItem } from "@/lib/types";
 
 export async function GET(request: Request) {
@@ -13,46 +13,41 @@ export async function GET(request: Request) {
   }
 
   try {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+
     const userJobs = await db
       .select()
       .from(jobs)
-      .where(eq(jobs.userId, userId))
+      .where(
+        and(
+          eq(jobs.userId, userId),
+          gte(jobs.completedAt, startOfMonth),
+          lte(jobs.completedAt, endOfMonth)
+        )
+      )
       .orderBy(desc(jobs.completedAt));
 
     const userExpenses = await db
       .select()
       .from(expenses)
-      .where(eq(expenses.userId, userId))
+      .where(
+        and(
+          eq(expenses.userId, userId),
+          gte(expenses.incurredAt, startOfMonth),
+          lte(expenses.incurredAt, endOfMonth)
+        )
+      )
       .orderBy(desc(expenses.incurredAt));
 
-    // If database is empty for this user, seed initial baseline
+    // If database is empty for this user this month, seed initial baseline
     if (userJobs.length === 0 && userExpenses.length === 0) {
-      const seed = generateSeedData(userId);
-
-      await db.insert(jobs).values(
-        seed.jobs.map((j) => ({
-          userId,
-          customer: j.customer,
-          description: j.description,
-          amount: j.amount.toString(),
-          completedAt: new Date(j.completedAt),
-        }))
-      );
-
-      await db.insert(expenses).values(
-        seed.expenses.map((e) => ({
-          userId,
-          category: e.category,
-          description: e.description,
-          amount: e.amount.toString(),
-          incurredAt: new Date(e.incurredAt),
-        }))
-      );
-
+      const seeded = await seedUserDatabase(userId);
       return NextResponse.json({
         dbAvailable: true,
-        jobs: seed.jobs,
-        expenses: seed.expenses,
+        jobs: seeded.jobs,
+        expenses: seeded.expenses,
       });
     }
 

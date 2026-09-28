@@ -76,7 +76,7 @@ export function generateSeedData(userId: string = "demo-user-id"): {
     {
       id: "seed-exp-3",
       userId,
-      category: "Overhead",
+      category: "Compliance",
       description: "Commercial liability insurance & site compliance",
       amount: 2600,
       incurredAt: makeDate(7, 10),
