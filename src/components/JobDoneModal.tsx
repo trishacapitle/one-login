@@ -22,7 +22,6 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
   useEffect(() => {
     if (isOpen) {
       setError(null);
-      // Small timeout to allow bottom sheet slide-in before focusing
       const timer = setTimeout(() => {
         customerInputRef.current?.focus();
       }, 150);
@@ -79,16 +78,16 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2.5 sm:p-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-6 pb-[max(5.5rem,calc(env(safe-area-inset-bottom,0px)+4.75rem))] bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
       {/* Click outside backdrop */}
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* 
-        Safari search bar clearance:
-        Modal is elevated above Safari's floating bottom URL bar via outer pb-[calc(3rem+env(safe-area-inset-bottom))]
-        and styled with rounded-3xl so it floats cleanly without being clipped.
+        Safari Search Bar Clearance:
+        Elevated cleanly above Mobile Safari's floating bottom search bar via outer pb-[max(5.5rem, ...)]
+        and internal pb-8 on the form action so the [DONE] button is always 100% visible and unclipped.
       */}
-      <div className="relative w-full max-w-lg max-h-[88dvh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 shadow-2xl z-10 animate-in slide-in-from-bottom-8 duration-200 overscroll-contain">
+      <div className="relative w-full max-w-md max-h-[82svh] overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 pb-6 shadow-2xl z-10 animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-200 overscroll-contain">
         {/* Mobile pull handle */}
         <div className="w-12 h-1.5 bg-zinc-700/60 rounded-full mx-auto mb-3 sm:hidden" />
 
@@ -193,12 +192,12 @@ export function JobDoneModal({ isOpen, onClose, onSubmit }: JobDoneModalProps) {
             </div>
           </div>
 
-          {/* Submit Action */}
-          <div className="pt-2 pb-1">
+          {/* Submit Action with dedicated bottom cushion */}
+          <div className="pt-2 pb-4 sm:pb-1">
             <button
               type="submit"
               disabled={submitting}
-              className="w-full min-h-[54px] py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-xl shadow-emerald-500/25 active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
+              className="w-full min-h-[56px] py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-black text-base tracking-wide uppercase transition-all shadow-xl shadow-emerald-500/25 active:scale-98 disabled:opacity-50 flex items-center justify-center space-x-2 cursor-pointer"
             >
               {submitting ? (
                 <span>Recording...</span>

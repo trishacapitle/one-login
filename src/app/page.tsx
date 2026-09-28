@@ -150,7 +150,7 @@ export default function HomePage() {
       />
 
       {/* Main Single Screen Content */}
-      <main className="flex-1 w-full max-w-md mx-auto px-4 py-4 pb-[calc(9.5rem+env(safe-area-inset-bottom,0px))] space-y-5">
+      <main className="flex-1 w-full max-w-md mx-auto px-4 py-4 pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] space-y-5">
         {/* Financial Position (Hero Profit + Money In + Money Out) */}
         <FinancialPositionCard
           position={financialPosition}
