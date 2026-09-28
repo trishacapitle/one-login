@@ -106,7 +106,7 @@ export default function HomePage() {
     // Instant toast confirmation
     showToast(`Job recorded: +$${input.amount.toLocaleString()} added to Money In!`);
 
-    // 2. Persist to Supabase / Repository in background
+    // 2. Persist to Database / Repository in background
     try {
       const persistedJob = await addJob(user.id, input);
       setJobs((prev) =>
